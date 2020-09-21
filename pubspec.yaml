@@ -68,7 +68,7 @@ flutter:
     - family: FiraSans
       fonts:
         - asset: assets/fonts/FiraSans-Regular.ttf
-        - asset: assetsfonts/FiraSans-Italic.ttf
+        - asset: assets/fonts/FiraSans-Italic.ttf
           style: italic
     - family: CormorantGaramond
       fonts:

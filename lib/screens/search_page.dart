@@ -28,6 +28,7 @@ class SearchPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         body: Center(
           child: Card(
+            color: ColorUtil.white,
             margin: const EdgeInsets.all(15),
             child: Container(
               margin: const EdgeInsets.all(10),
@@ -36,7 +37,7 @@ class SearchPage extends StatelessWidget {
               decoration: BoxDecoration(
                 gradient: ColorUtil.detailPageGradient,
               ),
-              child: SearchForm(),
+              child: Center(child: SearchForm()),
             ),
           ),
         ),

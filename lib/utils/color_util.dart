@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 
 class ColorUtil {
   static const white = Color(0xfff7f7f7);
+  static const dark = Color(0xff212121);
   static const silverWhite = Color(0xfff8f8f8);
   static const buttonColor = Color(0xff45b4ff);
   static const searchPageGradient = LinearGradient(
@@ -39,4 +40,6 @@ class ColorUtil {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
+  static final mainHeadingGradient =
+      resultPageGradient.createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
 }
