@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 
 import '../../utils/text_util.dart';
 import '../global/custom_button.dart';
+import '../../models/book_model.dart';
 
 class SearchForm extends StatefulWidget {
   SearchForm({
@@ -25,6 +26,7 @@ class SearchForm extends StatefulWidget {
 
 class _SearchFormState extends State<SearchForm> {
   GlobalKey<FormState> _formKey;
+  String _searchtext;
 
   @override
   void initState() {
@@ -36,6 +38,10 @@ class _SearchFormState extends State<SearchForm> {
     if (!_formKey.currentState.validate()) {
       return;
     }
+    _formKey.currentState.save();
+    final items = await BookModelProvider.searchBooks(_searchtext, "0");
+    print(items);
+    return;
   }
 
   @override
@@ -86,6 +92,7 @@ class _SearchFormState extends State<SearchForm> {
                   }
                   return null;
                 },
+                onSaved: (newValue) => _searchtext = newValue,
               ),
             ),
           ),

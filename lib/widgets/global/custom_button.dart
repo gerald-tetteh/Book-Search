@@ -24,7 +24,7 @@ class CustomButton extends StatefulWidget {
 
   final TextUtil textUtil;
   final String text;
-  final Future<void> Function() onPressed;
+  final Function() onPressed;
 
   @override
   _CustomButtonState createState() => _CustomButtonState();
@@ -36,28 +36,31 @@ class _CustomButtonState extends State<CustomButton> {
   Future<void> _submit() async {
     FocusScope.of(context).unfocus();
     setState(() => _isLoading = true);
-    widget.onPressed().then((value) => setState(() => _isLoading = false));
+    widget.onPressed().then((value) {
+      setState(() => _isLoading = false);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 20.0,
-      ),
-      color: ColorUtil.buttonColor,
-      child: _isLoading
-          ? CircularProgressIndicator()
-          : Text(
+    return _isLoading
+        ? CircularProgressIndicator()
+        : RaisedButton(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 70.0,
+              vertical: 10.0,
+            ),
+            color: ColorUtil.buttonColor,
+            child: Text(
               widget.text,
               style: widget.textUtil.buttonStyle,
             ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(
-          DefaultUtil.borderRadiusValue,
-        ),
-      ),
-      onPressed: _submit,
-    );
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                DefaultUtil.borderRadiusValue,
+              ),
+            ),
+            onPressed: _submit,
+          );
   }
 }
