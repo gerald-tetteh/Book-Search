@@ -11,10 +11,12 @@
 */
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../utils/text_util.dart';
 import '../global/custom_button.dart';
 import '../../models/book_model.dart';
+import '../../screens/results_page.dart';
 
 class SearchForm extends StatefulWidget {
   SearchForm({
@@ -26,11 +28,13 @@ class SearchForm extends StatefulWidget {
 
 class _SearchFormState extends State<SearchForm> {
   GlobalKey<FormState> _formKey;
+  BookModelProvider bookProvider;
   String _searchtext;
 
   @override
   void initState() {
     _formKey = GlobalKey<FormState>();
+    bookProvider = Provider.of<BookModelProvider>(context, listen: false);
     super.initState();
   }
 
@@ -39,8 +43,11 @@ class _SearchFormState extends State<SearchForm> {
       return;
     }
     _formKey.currentState.save();
-    final items = await BookModelProvider.searchBooks(_searchtext, "0");
-    print(items);
+    final items = await bookProvider.searchBooks(_searchtext, true);
+    Navigator.of(context).pushNamed(ResultsPage.routeName, arguments: {
+      "bookItems": items,
+      "searchText": _searchtext,
+    });
     return;
   }
 

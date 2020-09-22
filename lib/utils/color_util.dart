@@ -15,7 +15,7 @@ class ColorUtil {
   static const white = Color(0xfff7f7f7);
   static const dark = Color(0xff212121);
   static const silverWhite = Color(0xfff8f8f8);
-  static const buttonColor = Color(0xff45b4ff);
+  static const buttonColor = Color(0xfff77457);
   static const searchPageGradient = LinearGradient(
     colors: [
       Color(0xffabb2b8),

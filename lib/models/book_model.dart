@@ -11,18 +11,21 @@
 */
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
 import '../keys/api_keys.dart';
 
 class BookModel {
   final String title;
-  final String author;
+  final List<dynamic> author;
   final String publisher;
   final String publishDate;
   final String description;
   final String viewLink;
-  final String imageUrl;
+  final Map<String, dynamic> imageUrl;
 
   BookModel({
     this.title,
@@ -33,46 +36,68 @@ class BookModel {
     this.viewLink,
     this.imageUrl,
   });
+
+  @override
+  String toString() {
+    return this.title;
+  }
 }
 
-class BookModelProvider {
+class BookModelProvider with ChangeNotifier {
+  // index is used to control pagnation.
+  int startIndex = 0;
+  List<BookModel> _books = [];
+
   /*
     Searches for books based on the users
     input.
   */
-  static Future<List<BookModel>> searchBooks(
-      String input, String startIndex) async {
+  Future<List<BookModel>> searchBooks(String input,
+      [bool newSearch = false]) async {
+    startIndex = newSearch ? 0 : startIndex;
     final searchParams = input.trim().split(" ").join("+");
-    print(searchParams);
     final url =
         "https://www.googleapis.com/books/v1/volumes?q=$searchParams&startIndex=$startIndex&maxResults=40&key=${ApiKeys.booksApiKey}";
     final finalUrl = Uri.encodeFull(url);
-    print(finalUrl);
     try {
       final response = await http.get(finalUrl);
-      print(response);
       final jsonData = json.decode(response.body) as Map<String, dynamic>;
-      print(jsonData);
       final responseItems = jsonData["items"] as List<dynamic>;
-      print(responseItems);
-      if (responseItems == null) {
+      final possibleError = jsonData["error"] as Map<String, dynamic>;
+      if (possibleError != null) {
         return null;
+      }
+      if (responseItems == null) {
+        Fluttertoast.showToast(
+            msg: "This is Center Short Toast",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+        return [..._books];
       } else {
-        return responseItems
+        startIndex += 40;
+        var bookModels = responseItems
             .map((item) => BookModel(
                   title: item["volumeInfo"]["title"],
-                  author: item["volumeInfo"]["authors"][0],
+                  author: item["volumeInfo"]["authors"],
                   publisher: item["volumeInfo"]["publisher"],
                   publishDate: item["volumeInfo"]["publishedDate"],
                   description: item["volumeInfo"]["description"],
-                  imageUrl: item["volumeInfo"]["imageLinks"]["thumbnail"],
+                  imageUrl: item["volumeInfo"]["imageLinks"],
                   viewLink: item["volumeInfo"]["previewLink"],
                 ))
             .toList();
+        _books = bookModels;
+        return bookModels;
       }
     } catch (error) {
-      print(error);
       return null;
     }
   }
+
+  // change start index
+  void setStartIndex(int number) => startIndex = number;
 }

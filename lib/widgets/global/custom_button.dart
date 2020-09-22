@@ -36,9 +36,7 @@ class _CustomButtonState extends State<CustomButton> {
   Future<void> _submit() async {
     FocusScope.of(context).unfocus();
     setState(() => _isLoading = true);
-    widget.onPressed().then((value) {
-      setState(() => _isLoading = false);
-    });
+    widget.onPressed();
   }
 
   @override

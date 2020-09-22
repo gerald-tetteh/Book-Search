@@ -11,4 +11,6 @@
 
 class DefaultUtil {
   static const borderRadiusValue = 30.0;
+  static const borderRadiusValue2 = 20.0;
+  static const defaultImage = "assets/images/default_image.bmp";
 }
