@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import '../../utils/text_util.dart';
 import '../../utils/default_util.dart';
 import '../../models/book_model.dart';
+import '../../screens/detail_page.dart';
 
 class ResultsGrid extends StatelessWidget {
   const ResultsGrid({
@@ -31,29 +32,37 @@ class ResultsGrid extends StatelessWidget {
       delegate: SliverChildBuilderDelegate(
         (BuildContext ctx, int index) {
           var imgNotNull = bookItems[index].imageUrl != null;
-          return Card(
-            shape: RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.circular(DefaultUtil.borderRadiusValue2),
-            ),
-            child: ClipRRect(
-              borderRadius:
-                  BorderRadius.circular(DefaultUtil.borderRadiusValue2),
-              child: GridTile(
-                footer: GridTileBar(
-                  backgroundColor: Colors.black54,
-                  title: Text(
-                    bookItems[index].title,
-                    style: textUtil.defaultStyle,
+          return GestureDetector(
+            onTap: () => Navigator.of(ctx).pushNamed(BookDetailPage.routeName,
+                arguments: bookItems[index]),
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius:
+                    BorderRadius.circular(DefaultUtil.borderRadiusValue3),
+              ),
+              child: ClipRRect(
+                borderRadius:
+                    BorderRadius.circular(DefaultUtil.borderRadiusValue3),
+                child: GridTile(
+                  footer: GridTileBar(
+                    backgroundColor: Colors.black54,
+                    title: Text(
+                      bookItems[index].title ?? "Unknown",
+                      style: textUtil.defaultStyle,
+                    ),
                   ),
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: imgNotNull
-                          ? NetworkImage(bookItems[index].imageUrl["thumbnail"])
-                          : AssetImage(DefaultUtil.defaultImage),
-                      fit: BoxFit.cover,
+                  child: Hero(
+                    tag: bookItems[index].viewLink,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: imgNotNull
+                              ? NetworkImage(
+                                  bookItems[index].imageUrl["thumbnail"])
+                              : AssetImage(DefaultUtil.defaultImage),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
                   ),
                 ),

@@ -69,13 +69,14 @@ class BookModelProvider with ChangeNotifier {
       }
       if (responseItems == null) {
         Fluttertoast.showToast(
-            msg: "This is Center Short Toast",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
+          msg: "This is Center Short Toast",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
         return [..._books];
       } else {
         startIndex += 40;

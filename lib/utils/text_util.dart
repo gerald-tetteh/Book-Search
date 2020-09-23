@@ -52,6 +52,27 @@ class TextUtil {
     );
   }
 
+  TextStyle get descriptionStyle {
+    return TextStyle(
+      fontSize: 20.0 * textScale,
+    );
+  }
+
+  TextStyle get bookDetailTitle {
+    return TextStyle(
+      fontSize: 25.0 * textScale,
+      fontFamily: "CormorantGaramond",
+      fontWeight: FontWeight.bold,
+    );
+  }
+
+  TextStyle get viewOnGoogle {
+    return TextStyle(
+      fontSize: 18.0 * textScale,
+      color: ColorUtil.white,
+    );
+  }
+
   TextStyle get heading2 {
     return TextStyle(
       fontFamily: "CormorantGaramond",
@@ -72,6 +93,7 @@ class TextUtil {
     return TextStyle(
       fontStyle: FontStyle.italic,
       fontSize: 60.0 * textScale,
+      fontWeight: FontWeight.w300,
     );
   }
 }

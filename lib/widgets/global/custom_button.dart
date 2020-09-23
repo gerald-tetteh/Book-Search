@@ -31,34 +31,29 @@ class CustomButton extends StatefulWidget {
 }
 
 class _CustomButtonState extends State<CustomButton> {
-  var _isLoading = false;
-
   Future<void> _submit() async {
     FocusScope.of(context).unfocus();
-    setState(() => _isLoading = true);
     widget.onPressed();
   }
 
   @override
   Widget build(BuildContext context) {
-    return _isLoading
-        ? CircularProgressIndicator()
-        : RaisedButton(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 70.0,
-              vertical: 10.0,
-            ),
-            color: ColorUtil.buttonColor,
-            child: Text(
-              widget.text,
-              style: widget.textUtil.buttonStyle,
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(
-                DefaultUtil.borderRadiusValue,
-              ),
-            ),
-            onPressed: _submit,
-          );
+    return RaisedButton(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 70.0,
+        vertical: 10.0,
+      ),
+      color: ColorUtil.buttonColor,
+      child: Text(
+        widget.text,
+        style: widget.textUtil.buttonStyle,
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(
+          DefaultUtil.borderRadiusValue,
+        ),
+      ),
+      onPressed: _submit,
+    );
   }
 }

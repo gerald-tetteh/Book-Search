@@ -40,6 +40,14 @@ class ColorUtil {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
+  static const detailPageGradientReversed = LinearGradient(
+    colors: [
+      Color(0xffc06c84),
+      Color(0xff395d7d),
+    ],
+    begin: Alignment.topRight,
+    end: Alignment.bottomLeft,
+  );
   static final mainHeadingGradient =
       resultPageGradient.createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
 }

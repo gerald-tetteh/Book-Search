@@ -18,6 +18,8 @@ import '../utils/default_util.dart';
 import '../utils/text_util.dart';
 import '../widgets/resultsPage/results_grid_container.dart';
 
+import 'search_page.dart';
+
 class ResultsPage extends StatelessWidget {
   static const routeName = "/results-page";
   @override
@@ -49,12 +51,8 @@ class ResultsPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Results",
+                  "Results from",
                   style: textUtil.heading2,
-                ),
-                Text(
-                  "from",
-                  style: textUtil.subHeading2,
                 ),
                 Text(
                   "'$searchText'",
@@ -63,11 +61,18 @@ class ResultsPage extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 FlatButton.icon(
+                  color: ColorUtil.buttonColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.circular(DefaultUtil.borderRadiusValue),
+                  ),
                   icon: Icon(Icons.search),
                   label: Text(
                     "New Search",
+                    style: textUtil.defaultStyle,
                   ),
-                  onPressed: Navigator.of(context).pop,
+                  onPressed: () => Navigator.of(context)
+                      .pushReplacementNamed(SearchPage.routeName),
                 ),
               ],
             ),

@@ -30,6 +30,7 @@ class _SearchFormState extends State<SearchForm> {
   GlobalKey<FormState> _formKey;
   BookModelProvider bookProvider;
   String _searchtext;
+  var _isLoading = false;
 
   @override
   void initState() {
@@ -42,9 +43,11 @@ class _SearchFormState extends State<SearchForm> {
     if (!_formKey.currentState.validate()) {
       return;
     }
+    setState(() => _isLoading = true);
     _formKey.currentState.save();
     final items = await bookProvider.searchBooks(_searchtext, true);
-    Navigator.of(context).pushNamed(ResultsPage.routeName, arguments: {
+    Navigator.of(context)
+        .pushReplacementNamed(ResultsPage.routeName, arguments: {
       "bookItems": items,
       "searchText": _searchtext,
     });
@@ -103,11 +106,13 @@ class _SearchFormState extends State<SearchForm> {
               ),
             ),
           ),
-          CustomButton(
-            textUtil: textUtil,
-            text: "Search",
-            onPressed: _submit,
-          ),
+          _isLoading
+              ? CircularProgressIndicator()
+              : CustomButton(
+                  textUtil: textUtil,
+                  text: "Search",
+                  onPressed: _submit,
+                ),
         ],
       ),
     );
