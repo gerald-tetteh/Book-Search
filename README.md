@@ -1,16 +1,9 @@
-# all_books
+# Book Search App
 
-A new Flutter project.
+This app was developed using flutter. The app allows user to search for books using Google books API. The app displays the search results in a grid.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Dependencies
+- [Url Launcher](https://pub.dev/packages/url_launcher "Documentation: pub,dev")
+- [Flutter Toast](https://pub.dev/packages/fluttertoast "Documentation: pub.dev")
+- [Provider](https://pub.dev/packages/provider "Documentation: pub.dev")
+- [HTTP](https://pub.dev/packages/http "Documentation: pub.dev")

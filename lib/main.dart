@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (ctx) => BookModelProvider(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Book Search',
         theme: ThemeData(
           fontFamily: "FiraSans",

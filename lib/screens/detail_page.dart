@@ -152,25 +152,26 @@ class BookDetailPage extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          Spacer(),
-                          FlatButton.icon(
-                            color: ColorUtil.buttonColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                DefaultUtil.borderRadiusValue,
+                          Expanded(
+                            child: FlatButton.icon(
+                              color: ColorUtil.buttonColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                  DefaultUtil.borderRadiusValue,
+                                ),
                               ),
-                            ),
-                            icon: Icon(
-                              Icons.book_outlined,
-                            ),
-                            label: Text(
-                              "View on Google",
-                              style: textUtil.viewOnGoogle,
-                            ),
-                            onPressed: () => _openLink(
-                              bookModel.viewLink,
-                              _scaffoldKey,
-                              textUtil,
+                              icon: Icon(
+                                Icons.book_outlined,
+                              ),
+                              label: Text(
+                                "More Details",
+                                style: textUtil.viewOnGoogle,
+                              ),
+                              onPressed: () => _openLink(
+                                bookModel.viewLink,
+                                _scaffoldKey,
+                                textUtil,
+                              ),
                             ),
                           ),
                         ],
